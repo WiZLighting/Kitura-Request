@@ -27,7 +27,13 @@ public struct JSONEncoding: Encoding {
         guard let parameters = parameters, !parameters.isEmpty else { return }
 
         let options = JSONSerialization.WritingOptions()
+        //otherwise JSONSerialization will die with segfault
+        #if os(Linux)
+        let data = try JSONSerialization.data(withJSONObject: NSDictionary(dictionary:parameters), options: options)
+        #else
         let data = try JSONSerialization.data(withJSONObject: parameters, options: options)
+        #endif
+
         request.httpBody = data
     }
 }
