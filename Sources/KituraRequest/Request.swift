@@ -79,6 +79,12 @@ public class Request {
     }
 
     public func response(_ completionHandler: @escaping CompletionHandler) {
+        defer {
+            self.request = nil
+            self.response = nil
+            self.data = nil
+            self.error = nil
+        }
         guard let response = response else {
             completionHandler(request, nil, nil, error)
             return
