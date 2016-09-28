@@ -23,8 +23,8 @@ import LoggerAPI
 /// TODO: Make an asynchronus version
 public class Request {
 
-    var request: ClientRequest?
-    var response: ClientResponse?
+    weak var request: ClientRequest?
+    weak var response: ClientResponse?
     var data: NSData?
     var error: Swift.Error?
 
